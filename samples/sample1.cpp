@@ -9,7 +9,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-int main()
+int main(int argc, char** argv)
 {
     Display d(800, 600, "Hello world!");
     

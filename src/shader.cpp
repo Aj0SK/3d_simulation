@@ -11,6 +11,8 @@ Shader::Shader(const std::string& fileName)
 	for(unsigned int i = 0; i < NUM_SHADERS; i++)
 		glAttachShader(m_program, m_shaders[i]);
 
+    //glBindAttribLocation(m_program, 0, "position");
+    
 	glLinkProgram(m_program);
 	CheckShaderError(m_program, GL_LINK_STATUS, true, "Error linking shader program");
 
@@ -87,12 +89,12 @@ GLuint Shader::CreateShader(const std::string& text, GLenum type)
 		std::cerr << "Error compiling shader type " << type << std::endl;
 
     const GLchar* shaderSourceStrings[1];
-    GLint shaderSourceStringsLength[1];
+    GLint shaderSourceStringsLengths[1];
     
     shaderSourceStrings[0] = text.c_str();
-    shaderSourceStringsLength[0] = text.length();
+    shaderSourceStringsLengths[0] = text.length();
 
-    glShaderSource(shader, 1, shaderSourceStrings, shaderSourceStringsLength);
+    glShaderSource(shader, 1, shaderSourceStrings, shaderSourceStringsLengths);
     glCompileShader(shader);
 
     CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error compiling shader!");

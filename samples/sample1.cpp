@@ -33,6 +33,7 @@ int main(int argc, char** argv)
         
         transform.GetPos().x = sinf(counter);
         transform.GetRot().z = cosf(counter);
+        transform.SetScale(glm::vec3(cosf(counter), cosf(counter), cosf(counter)));
         
         shader.Bind();
         texture.Bind(0);

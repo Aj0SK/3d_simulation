@@ -5,6 +5,7 @@
 #include "shader.h"
 #include "mesh.h"
 #include "texture.h"
+#include "transform.h"
 
 using std::cin;
 using std::cout;
@@ -22,14 +23,24 @@ int main(int argc, char** argv)
     Mesh mesh(vertices, sizeof(vertices)/sizeof(vertices[0]));
     Shader shader("res/basicShader");
     Texture texture("res/bricks.jpg");
+    Transform transform;
+    
+    float counter = 0.0f;
     
     while(!d.IsClosed())
     {
         d.Clear(0.0f, 0.15f, 0.3f, 1.0f);
-        texture.Bind(0);
+        
+        transform.GetPos().x = sinf(counter);
+        transform.GetRot().z = cosf(counter);
+        
         shader.Bind();
+        texture.Bind(0);
+        shader.Update(transform);
         mesh.Draw();
+        
         d.Update();
+        counter += 0.01f;
     }
     return 0;
 }

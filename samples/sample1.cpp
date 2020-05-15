@@ -6,10 +6,14 @@
 #include "mesh.h"
 #include "texture.h"
 #include "transform.h"
+#include "camera.h"
 
 using std::cin;
 using std::cout;
 using std::endl;
+
+constexpr int kWidth = 800;
+constexpr int kHeight = 600;
 
 int main(int argc, char** argv)
 {
@@ -24,6 +28,7 @@ int main(int argc, char** argv)
     Shader shader("res/basicShader");
     Texture texture("res/bricks.jpg");
     Transform transform;
+    Camera cam(glm::vec3(0, 0, -3), 70.0f, static_cast<float>(kWidth)/static_cast<float>(kHeight), 0.01f, 1000.0f);
     
     float counter = 0.0f;
     
@@ -37,7 +42,7 @@ int main(int argc, char** argv)
         
         shader.Bind();
         texture.Bind(0);
-        shader.Update(transform);
+        shader.Update(transform, cam);
         mesh.Draw();
         
         d.Update();

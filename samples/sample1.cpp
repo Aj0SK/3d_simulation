@@ -28,7 +28,7 @@ int main(int argc, char** argv)
     Shader shader("res/basicShader");
     Texture texture("res/bricks.jpg");
     Transform transform;
-    Camera cam(glm::vec3(0, 0, -3), 70.0f, static_cast<float>(kWidth)/static_cast<float>(kHeight), 0.01f, 1000.0f);
+    Camera cam(glm::vec3(0, 0, -5), 70.0f, static_cast<float>(kWidth)/static_cast<float>(kHeight), 0.01f, 1000.0f);
     
     float counter = 0.0f;
     
@@ -37,8 +37,14 @@ int main(int argc, char** argv)
         d.Clear(0.0f, 0.15f, 0.3f, 1.0f);
         
         transform.GetPos().x = sinf(counter);
-        transform.GetRot().z = cosf(counter);
-        transform.SetScale(glm::vec3(cosf(counter), cosf(counter), cosf(counter)));
+        transform.GetPos().y = cosf(counter);
+        transform.GetRot().x = counter;
+        transform.GetRot().y = counter;
+        transform.GetRot().z = counter;
+        //transform.GetPos().x = counter * 50.0;
+        //transform.GetPos().y = counter * 50.0;
+        //transform.GetPos().z = counter * 50.0;
+        //transform.SetScale(glm::vec3(cosf(counter), cosf(counter), cosf(counter)));
         
         shader.Bind();
         texture.Bind(0);
